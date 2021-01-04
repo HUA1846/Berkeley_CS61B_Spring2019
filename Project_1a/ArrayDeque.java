@@ -22,7 +22,7 @@ public class ArrayDeque<T> {
 		System.arraycopy(other.items, 0, items, 0, capacity);
 	}
 
-	public int calcNewCap(int cap){
+	public int resize(int cap){
 		if(size == cap) {
 			int newCapacity = cap * 2;
 			capacity = newCapacity;
@@ -37,14 +37,14 @@ public class ArrayDeque<T> {
 	}
 	public void expand(){
 		T[] newArray = (T[]) new Object[capacity];
-		int currentFirstIdx = nextFirst + 1;
+		int currentFirstIdx = plusOne(nextFirst);
 		int firstLength = items.length - (currentFirstIdx);
 		int lastLength = nextLast;
 		int newFirst = capacity - firstLength;
 		System.arraycopy(items, currentFirstIdx, newArray, newFirst, firstLength);
 		System.arraycopy(items, 0, newArray, 0, lastLength);
 
-		nextFirst = newFirst - 1;
+		nextFirst = minusOne(newFirst);
 		items = newArray;
 	}
 	public void shrink(){
@@ -68,44 +68,44 @@ public class ArrayDeque<T> {
 
 	}
 
-	private int calcNextFirst(int index){
+	private int minusOne(int index){
 		if(index == 0) {
-			return capacity - 1;
+			return items.length - 1;
 		} else {
 			return index -1;
 		}
 	}
-	private int calcNextLast(int index){
-		if(index == capacity - 1){
+	private int plusOne(int index){
+		if(index == items.length - 1){
 			return 0;
 		} else {
 			return index + 1;
 		}
 	}
 	public void printDeque() {
-		int currentFirst = calcNextLast(nextFirst);
+		int currentFirst = plusOne(nextFirst);
 		while (currentFirst != nextLast) {
 			System.out.print(items[currentFirst] + " ");
-			currentFirst = calcNextLast(currentFirst);
+			currentFirst = plusOne(currentFirst);
 		}
 
 	}
 	public void addFirst(T item){
 		items[nextFirst] = item;
 		size += 1;
-		nextFirst = calcNextFirst(nextFirst);
+		nextFirst = minusOne(nextFirst);
 
 		if(size == capacity) {
-			calcNewCap(capacity);
+			resize(capacity);
 		}
 	}
 
 	public void addLast(T item){
 		items[nextLast] = item;
 		size += 1;
-		nextLast = calcNextLast(nextLast);
+		nextLast = plusOne(nextLast);
 		if(size == capacity) {
-			calcNewCap(capacity);
+			resize(capacity);
 		}
 
 	}
@@ -121,7 +121,7 @@ public class ArrayDeque<T> {
 		nextFirst = removeIdx;
 		size -= 1;
 		if((double) size / (double)capacity < 0.25 && capacity > initialLength){
-			calcNewCap(capacity);
+			resize(capacity);
 		}
 
 		return item;
@@ -138,7 +138,7 @@ public class ArrayDeque<T> {
 		nextLast = removeIdx;
 		size -= 1;
 		if((double) size / (double)capacity < 0.25 && capacity > initialLength){
-			calcNewCap(capacity);
+			resize(capacity);
 		}
 
 		return item;
