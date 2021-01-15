@@ -49,13 +49,14 @@ public class BubbleGrid extends UnionFind {
      * are unique, valid locations in the grid. Must be non-destructive
      * and have no side-effects to grid. */
     public int[] popBubbles(int[][] darts) {
-        int[] res = new int[2];
+        int[] res = new int[darts.length];
         int col = grid[0].length;
-        if(arr[darts[0][0]*col + darts[0][1]] != -2) {
-            res[0] = sizes[darts[0][0]*col + darts[0][1]] - 1; //popped bubbles do not fall
-        }
-        if(arr[darts[1][0]*col + darts[1][1]] != -2) {
-            res[1] = sizes[darts[1][0]*col + darts[1][1]] - 1;
+        for(int i = 0; i < darts.length; i++) {
+            if(arr[darts[i][0]*col + darts[i][1]] != -2) {
+                res[i] = sizes[darts[i][0]*col + darts[i][1]] - 1; //popped bubbles do not fall
+            } else {
+                res[i] = 0;
+            }
         }
 
         return res;
