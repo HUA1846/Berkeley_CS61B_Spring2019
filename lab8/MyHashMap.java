@@ -5,15 +5,15 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     private int initialSize = 16;
     private double loadFactor = 1.5;
     private int resize = 2;
-    private ArrayList<Entry> buckets;
+    private Entry[] buckets = new Entry[initialSize];
     private HashSet<K> keys = new HashSet<>();
 
-    private class Entry extends ArrayList {
-        public K key;
-        public V val;
+    private static class Entry extends ArrayList {
+        public Object key;
+        public Object val;
         public Entry next;
 
-        public Entry(K k, V v, Entry n) {
+        public Entry(Object k, Object v, Entry n) {
             key = k;
             val = v;
             next = n;
@@ -21,39 +21,27 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     }
 
     public MyHashMap() {
-        buckets = new ArrayList<>(initialSize);
-        for(int i = 0; i < initialSize; i ++) {
-            buckets.add(new Entry(null, null, null));
-        }
+        buckets = new Entry[initialSize];
         size = 0;
     }
 
     public MyHashMap(int initialSize) {
         this.initialSize = initialSize;
-        buckets = new ArrayList<>(initialSize);
-        for(int i = 0; i < initialSize; i ++) {
-            buckets.add(new Entry(null, null, null));
-        }
+        buckets = new Entry[initialSize];
         size = 0;
     }
 
     public MyHashMap(int initialSize, double loadFactor) {
         this.initialSize = initialSize;
         this.loadFactor = loadFactor;
-        buckets = new ArrayList<>(initialSize);
-        for(int i = 0; i < initialSize; i ++) {
-            buckets.add(new Entry(null, null, null));
-        }
+        buckets = new Entry[initialSize];
         size = 0;
     }
 
     @Override
     public void clear() {
         size = 0;
-        buckets = new ArrayList<>(initialSize);
-        for(int i = 0; i < initialSize; i ++) {
-            buckets.add(new Entry(null, null, null));
-        }
+        buckets = new Entry[initialSize];
     }
 
     public int hash(K key) {
@@ -64,8 +52,8 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     @Override
     public boolean containsKey(K key) {
         int h = hash(key);
-        if(buckets.get(h).key == null) return false;
-        Entry current = buckets.get(h);
+        if(buckets[h] == null) return false;
+        Entry current = buckets[h];
         while(current != null) {
             if(current.key.equals(key)) {
                 return true;
@@ -78,8 +66,8 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     @Override
     public V get(K key) {
         int h = hash(key);
-        if(buckets.get(h).key == null) return null;
-        for(Entry e = buckets.get(h); e != null; e = e.next) {
+        if(buckets[h] == null) return null;
+        for(Entry e = buckets[h]; e != null; e = e.next) {
             if(e.key.equals(key)) return (V) e.val;
         }
         return null;
@@ -95,42 +83,19 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     // putting with existing key updates the value
     public void put(K key, V value) {
         int h = hash(key);
-        for(Entry e = buckets.get(h); e != null; e = e.next) {
+        for(Entry e = buckets[h]; e != null; e = e.next) {
             if(key.equals(e.key)) {
                 e.val = value;
+                return;
             }
         }
-        Entry current = buckets.get(h);
-        current = new Entry(key, value, buckets.get(h));
+        buckets[h] = new Entry(key, value, buckets[h]);
         size += 1;
         keys.add(key);
         if((double)size/initialSize > loadFactor) {
             resize();
         }
-        /*
-        if(buckets.get(h).key == null) {
-            buckets.get(h).key = key;
-            buckets.get(h).val = value;
-            buckets.get(h).next = null;
-            size += 1;
-            if((double)size/initialSize > loadFactor) {
-                resize();
-            }
-            keys.add(key);
-        } else {
-            Entry current = buckets.get(h);
-            if(current.key.equals(key)) return;
-            while(current.next != null) {
-                if(current.key.equals(key)) return;
-                current = current.next;
-            }
-            current.next = new Entry(key, value, null);
-            keys.add(key);
-            size += 1;
-            if((double)size/initialSize > loadFactor) {
-                resize();
-            }
-        } */
+
     }
 
     public void resize() {
@@ -142,9 +107,9 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     }
     public void putAll(MyHashMap<K, V> old) {
         for(Entry e : old.buckets) {
-            if(e.key == null) continue;
+            if(e == null) continue;
             while (e != null) {
-                put(e.key, e.val);
+                put((K)e.key, (V)e.val);
                 e = e.next;
             }
         }
