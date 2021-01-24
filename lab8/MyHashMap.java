@@ -8,7 +8,7 @@ public class MyHashMap<K, V> implements Map61B<K, V>{
     private Entry[] buckets = new Entry[initialSize];
     private HashSet<K> keys = new HashSet<>();
 
-    private static class Entry extends ArrayList {
+    private static class Entry {
         public Object key;
         public Object val;
         public Entry next;
