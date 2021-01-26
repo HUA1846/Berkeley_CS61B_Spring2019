@@ -22,11 +22,12 @@ public class KDTreeTest {
 
         KDTree kdt = new KDTree(List.of(p1, p2, p3, p4, p5, p6, p7));
         Point ret = kdt.nearest(0, 7); // return p6
-        assertEquals(0, ret.getX(), 0.01);
-        assertEquals(7, ret.getY(), 0.01);
+        assertEquals(1, ret.getX(), 0.01);
+        assertEquals(5, ret.getY(), 0.01);
 
     }
 
+    @Test
     public void testNearestRandom() {
         List<Point> points = new ArrayList<>();
         for(int i = 0; i < 100; i++) {

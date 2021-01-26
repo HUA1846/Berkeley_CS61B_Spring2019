@@ -5,6 +5,7 @@ public class KDTree implements PointSet {
     private List<Point> points;
     private Node root;
 
+
     public KDTree(List<Point> points) {
         this.points = points;
         root = new Node(points.get(0));
@@ -72,15 +73,28 @@ public class KDTree implements PointSet {
 
     @Override
     public Point nearest(double x, double y) {
-        double best = Double.POSITIVE_INFINITY;
-        Node res = root;
+        double shortest = Double.POSITIVE_INFINITY;
+        Point best = root.p;
         Point goal = new Point(x, y);
-        while(res != null) {
-            if(res.p.distance(res.p, goal) < best) {
-
+        Map<Point, Double> distances = new HashMap<>();
+        distances = nearestHelper(distances, root, goal);
+        for(HashMap.Entry<Point, Double> entry : distances.entrySet()) {
+            if(entry.getValue() < shortest) {
+                best = entry.getKey();
+                shortest = entry.getValue();
             }
         }
+        return best;
+    }
 
+    public Map<Point, Double> nearestHelper(Map<Point, Double> dist, Node node, Point goal) {
+        if(node == null) {
+            return null;
+        }
+        dist.put(node.p, node.p.distance(node.p, goal));
+        if(node.left != null) nearestHelper(dist, node.left, goal);
+        if(node.right != null) nearestHelper(dist, node.right, goal);
+        return dist;
     }
 
     public static void main(String[] args) {
@@ -101,3 +115,28 @@ public class KDTree implements PointSet {
         System.out.println(ret.getY());
     }
 }
+/*
+ while(best != null) {
+            if(best.p.distance(best.p, goal) < shortest) {
+                shortest = best.p.distance(best.p, goal);
+            }
+            if(best.isVertical) {
+                if(x - best.p.getX() < 0) {
+                    best = best.left;
+                } else {
+                    best = best.right;
+                }
+            }
+            if(best.p.distance(best.p, goal) < shortest) {
+                shortest = best.p.distance(best.p, goal);
+            }
+            if(!best.isVertical) {
+                if(y - best.p.getY() < 0) {
+                    best = best.left;
+                } else {
+                    best = best.right;
+                }
+            }
+        }
+        return best.p;
+ */
