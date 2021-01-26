@@ -74,27 +74,47 @@ public class KDTree implements PointSet {
     @Override
     public Point nearest(double x, double y) {
         double shortest = Double.POSITIVE_INFINITY;
-        Point best = root.p;
+        Node best = root;
         Point goal = new Point(x, y);
-        Map<Point, Double> distances = new HashMap<>();
-        distances = nearestHelper(distances, root, goal);
-        for(HashMap.Entry<Point, Double> entry : distances.entrySet()) {
-            if(entry.getValue() < shortest) {
-                best = entry.getKey();
-                shortest = entry.getValue();
-            }
+        best = nearestHelper(root, goal, best);
+        return best.p;
+    }
+    public double chooseSide(Node target, Node n) {
+        if(n.isVertical) {
+            return target.p.getX() - n.p.getX();
+        } else {
+            return target.p.getY() - n.p.getY();
         }
-        return best;
     }
 
-    public Map<Point, Double> nearestHelper(Map<Point, Double> dist, Node node, Point goal) {
-        if(node == null) {
-            return null;
+    public Node nearestHelper(Node n, Point goal, Node best) {
+        if(n == null) return best;
+        Node goodSide = n;
+        Node badSide = n;
+        Node target = new Node(goal);
+
+        if(n.p.distance(n.p, goal) < best.p.distance(best.p, goal)) {
+            best = n;
         }
-        dist.put(node.p, node.p.distance(node.p, goal));
-        if(node.left != null) nearestHelper(dist, node.left, goal);
-        if(node.right != null) nearestHelper(dist, node.right, goal);
-        return dist;
+        if(chooseSide(target, n) < 0) {
+            goodSide = n.left;
+            badSide = n.right;
+        } else {
+            goodSide = n.right;
+            badSide = n.left;
+        }
+        best = nearestHelper(goodSide, goal, best);
+        /* is badSide worth exploring? */
+        if(n.isVertical && Math.pow(n.p.getX() - goal.getX(), 2) < best.p.distance(best.p, goal)) {
+            best = nearestHelper(badSide, goal, best);
+        }
+        if(!n.isVertical && Math.pow(n.p.getY() - goal.getY(), 2) < best.p.distance(best.p, goal)) {
+            best = nearestHelper(badSide, goal, best);
+        }
+
+
+        return best;
+
     }
 
     public static void main(String[] args) {
@@ -115,28 +135,3 @@ public class KDTree implements PointSet {
         System.out.println(ret.getY());
     }
 }
-/*
- while(best != null) {
-            if(best.p.distance(best.p, goal) < shortest) {
-                shortest = best.p.distance(best.p, goal);
-            }
-            if(best.isVertical) {
-                if(x - best.p.getX() < 0) {
-                    best = best.left;
-                } else {
-                    best = best.right;
-                }
-            }
-            if(best.p.distance(best.p, goal) < shortest) {
-                shortest = best.p.distance(best.p, goal);
-            }
-            if(!best.isVertical) {
-                if(y - best.p.getY() < 0) {
-                    best = best.left;
-                } else {
-                    best = best.right;
-                }
-            }
-        }
-        return best.p;
- */
