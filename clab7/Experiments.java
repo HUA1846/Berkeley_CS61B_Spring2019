@@ -43,16 +43,20 @@ public class Experiments {
         BST<Integer> bst = new BST<>();
         List<Double> bstDepth = new ArrayList<>();
         List<Integer> operations = new ArrayList<>();
-        Random r = new Random();
+        RandomGenerator r = new RandomGenerator();
         int intialSize = 5000;
-        int M = 10;
-        for(int i = 0; i < intialSize; i += 1) {
-            bst.add(r.nextInt());
+        int M = 5000;
+        while(bst.size() < intialSize) {
+            int rand = r.getRandomInt(10000);
+            if(!bst.contains(rand)) {
+                bst.add(rand);
+            }
         }
         bstDepth.add(bst.averageDepth());
         operations.add(0);
         for(int i = 0; i < M; i += 1) {
-            ExperimentHelper.randomInsertAndDelete(bst);
+            ExperimentHelper.randomDelete(bst);
+            ExperimentHelper.randomInsert(bst);
             bstDepth.add(bst.averageDepth());
             operations.add(i + 1);
         }
@@ -65,7 +69,7 @@ public class Experiments {
     }
 
     public static void main(String[] args) {
-        experiment1();
-//        experiment2();
+//        experiment1();
+        experiment2();
     }
 }

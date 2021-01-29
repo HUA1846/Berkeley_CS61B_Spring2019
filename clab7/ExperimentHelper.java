@@ -40,13 +40,17 @@ public class ExperimentHelper {
         return (double) optimalIPL(N) / N;
     }
 
-    public static void randomInsertAndDelete(BST<Integer> bst) {
-        Random r = new Random();
-        int deleted = r.nextInt();
-        if(bst.contains(deleted)) {
-            bst.deleteTakingSuccessor(deleted);
+    public static void randomInsert(BST<Integer> bst) {
+        RandomGenerator r = new RandomGenerator();
+        int rand = r.getRandomInt(20000);
+        while(bst.contains(rand)) {
+            rand = r.getRandomInt(20000);
         }
-        bst.add(r.nextInt());
+        bst.add(rand);
+    }
+
+    public static void randomDelete(BST<Integer> bst) {
+            bst.deleteTakingSuccessor(bst.getRandomKey());
     }
 
     public static void main(String[] args) {
