@@ -1,7 +1,7 @@
 # CS61B Spring 2019 Homework, Labs, Projects
 Course link: https://sp19.datastructur.es/
 
-|Projects |         |
+|Projects|         |
 |---------|---------|
 | Project 0    |[NBody](https://github.com/HUA1846/CS61B_Self_Study/tree/main/Project_0)
 | Project 1a   |[ArrayDeque](https://github.com/HUA1846/CS61B_Self_Study/tree/main/Project_1a)
@@ -9,7 +9,7 @@ Course link: https://sp19.datastructur.es/
 | Project 1gold |[Randomized testing, JUnit](https://github.com/HUA1846/CS61B_Self_Study/tree/main/project_1gold)
 | Project 2ab    |[Priority Queue, KDTree](https://github.com/HUA1846/CS61B_Self_Study/tree/main/proj2ab/bearmaps)
 
-|Challenge Labs |         |
+|Challenge Labs|         |
 |---------|---------|
 | clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)
 | clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)
