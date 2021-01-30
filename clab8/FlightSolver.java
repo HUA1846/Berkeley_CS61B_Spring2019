@@ -8,14 +8,14 @@ import java.util.*;
  */
 public class FlightSolver {
     PriorityQueue<Flight> startpq;
-    Map<Integer, Integer> timeToPassenger;
+    Map<Flight, Integer> timeToPassenger;
 
     public FlightSolver(ArrayList<Flight> flights) {
         startpq = new PriorityQueue<>((f1, f2) -> f1.startTime() - f2.startTime());
         timeToPassenger = new HashMap<>();
         for(Flight f : flights) {
             startpq.add(f);
-            timeToPassenger.put(f.startTime(), f.passengers());
+            timeToPassenger.put(f, f.passengers());
         }
 
     }
@@ -23,32 +23,25 @@ public class FlightSolver {
     public int solve() {
        int sum = 0;
        int i = 0;
-       int count = startpq.size();
        int[] sums = new int[startpq.size()];
-        Flight current = startpq.poll();
-       while(count > 0) {
-           if(startpq.size() == 0) {
-               sums[i] = current.passengers(); break;
+       /* iterate through each item in pq
+        */
+       while(startpq.size() > 0) {
+           Flight current = startpq.poll();
+           sum = current.passengers();
+           for(Map.Entry<Flight, Integer> f : timeToPassenger.entrySet()) {
+               if(current.endTime() > f.getKey().startTime() && f.getKey().startTime > current.startTime()) {
+                   sum += f.getValue();
+               }
            }
-           Flight next = startpq.peek();
-           if(current.endTime() > next.startTime()) {
-               sum += current.passengers() + next.passengers;
-               sums[i] = sum;
-               startpq.poll();
-           } else {
-               sum = 0;
-               sum += current.passengers();
-               sums[i] = sum;
-               current = startpq.poll();
-               i += 1;
-           }
-           count -= 1;
+           sums[i] = sum;
+           i += 1;
        }
        int max = 0;
-        for(int n : sums) {
-            max = Math.max(max, n);
-        }
-        return max;
+       for(int n : sums) {
+           max = Math.max(max, n);
+       }
+       return max;
     }
 
 }
