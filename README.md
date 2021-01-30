@@ -11,14 +11,16 @@ Course link: https://sp19.datastructur.es/
 
 |Challenge Labs|         |Description |
 |---------|---------|-----------------|
-| clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)|use Union Find to solve bubble grid problem
+| clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)|Use Union Find DS to solve bubble grid problem
 | clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)|Experiment BST average depth with random insertion and symmetric/asymmetric deletions 
+| clab 8    |[FlightSolver](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab8)|Use HashMap and PQ to solve max passengers problem
 
 |Labs |         |
 |---------|---------|
 | lab 5    |[HugLife](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab5)
 | lab 6    |[UnionFind](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab6%20UnionFind)
 | lab 7    |[BSTMap](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab7)
+| lab 8    |[HashMap](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab8)
 
 |Homework |         |
 |---------|---------|
