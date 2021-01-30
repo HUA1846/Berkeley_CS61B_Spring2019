@@ -9,10 +9,10 @@ Course link: https://sp19.datastructur.es/
 | Project 1gold |[Randomized testing, JUnit](https://github.com/HUA1846/CS61B_Self_Study/tree/main/project_1gold)
 | Project 2ab    |[Priority Queue, KDTree](https://github.com/HUA1846/CS61B_Self_Study/tree/main/proj2ab/bearmaps)
 
-|Challenge Labs|         |
-|---------|---------|
-| clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)
-| clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)
+|Challenge Labs|         |Description |
+|---------|---------|-----------------|
+| clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)|use Union Find to solve bubble grid problem
+| clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)|Experiment BST average depth with random insertion and symmetric/asymmetric deletions 
 
 |Labs |         |
 |---------|---------|
