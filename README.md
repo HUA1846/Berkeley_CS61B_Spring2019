@@ -14,7 +14,7 @@ Course link: https://sp19.datastructur.es/
 | clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)|Use Union Find DS to solve bubble grid problem
 | clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)|Experiment BST average depth with random insertion and symmetric/asymmetric deletions 
 | clab 8    |[FlightSolver, RabinKarp](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab8)|Part 1: Use HashMap and PQ to solve max passengers problem
-------------------------------------------------------------------------------------------------------------|Part 2: implement RabinKarp string-searching algorithm that “uses hashing to find any one of a set of pattern strings in a text”. One practical application is detecting plagiarism.
+|           ||Part 2: implement RabinKarp string-searching algorithm that “uses hashing to find any one of a set of pattern strings in a text”. One practical application is detecting plagiarism.
 
 |Labs |         |
 |---------|---------|
