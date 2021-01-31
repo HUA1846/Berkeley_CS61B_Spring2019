@@ -3,6 +3,8 @@
  * in constant time and have a constant-time hash function. Used for the Rabin-Karp
  * string-matching algorithm.
  */
+import java.util.*;
+
 class RollingString{
 
     /**
@@ -17,13 +19,27 @@ class RollingString{
      */
     static final int PRIMEBASE = 6113;
 
+    public String s;
+    public ArrayDeque<Character> chars = new ArrayDeque<>();
+    int hs;
+    int base = 1;
     /**
      * Initializes a RollingString with a current value of String s.
      * s must be the same length as the maximum length.
      */
     public RollingString(String s, int length) {
         assert(s.length() == length);
-        /* FIX ME */
+        this.s = s;
+        for(int i = 0; i < length - 1; i++) {
+            base = (base * UNIQUECHARS) % PRIMEBASE;
+        }
+        for(int i = 0; i < length; i ++) {
+            chars.add(s.charAt(i));
+        }
+        for(char c : chars) {
+            hs = (UNIQUECHARS * hs + c) % PRIMEBASE;
+        }
+
     }
 
     /**
@@ -32,7 +48,9 @@ class RollingString{
      * Should be a constant-time operation.
      */
     public void addChar(char c) {
-        /* FIX ME */
+        hs = ((hs - (int) chars.removeFirst()* base % PRIMEBASE) * UNIQUECHARS + (int)c) % PRIMEBASE;
+        hs = Math.floorMod(hs, PRIMEBASE);
+        chars.add(c);
     }
 
 
@@ -43,8 +61,10 @@ class RollingString{
      */
     public String toString() {
         StringBuilder strb = new StringBuilder();
-        /* FIX ME */
-        return "";
+        for(char c : chars) {
+            strb.append(c);
+        }
+        return strb.toString();
     }
 
     /**
@@ -52,8 +72,7 @@ class RollingString{
      * Should be a constant-time operation.
      */
     public int length() {
-        /* FIX ME */
-        return -1;
+        return chars.size();
     }
 
 
@@ -64,8 +83,7 @@ class RollingString{
      */
     @Override
     public boolean equals(Object o) {
-        /* FIX ME */
-        return false;
+        return toString().equals(o.toString());
     }
 
     /**
@@ -74,7 +92,6 @@ class RollingString{
      */
     @Override
     public int hashCode() {
-        /* FIX ME */
-        return -1;
+        return hs;
     }
 }
