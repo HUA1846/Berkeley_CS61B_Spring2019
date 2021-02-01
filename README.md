@@ -10,7 +10,7 @@ Course link: https://sp19.datastructur.es/
 | Project 2ab    |[Priority Queue, KDTree](https://github.com/HUA1846/CS61B_Self_Study/tree/main/proj2ab/bearmaps)
 
 |Challenge Labs|         |Description |
-|---------|---------|-----------------|
+|--------------|---------|-----------------|
 | clab 6    |[BubbleGrid](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab6%20-BubbleGrid)|Use Union Find DS to solve bubble grid problem
 | clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)|Experiment BST average depth with random insertion and symmetric/asymmetric deletions 
 | clab 8    |[FlightSolver, RabinKarp](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab8)|Part 1: Use HashMap and PQ to solve max passengers problem
@@ -18,7 +18,7 @@ Course link: https://sp19.datastructur.es/
 | clab 9    |[Graph, SeparableEnemy](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab9)|Use graph to separate the party-goers into two groups such that no two members of the same group are enemies
 
 |Labs |             | Description |
-|---------|---------|
+|---------|---------|-------------|
 | lab 5    |[HugLife](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab5) |
 | lab 6    |[UnionFind](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab6%20UnionFind) |
 | lab 7    |[BSTMap](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab7) |
