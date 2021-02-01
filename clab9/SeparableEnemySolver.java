@@ -23,12 +23,40 @@ public class SeparableEnemySolver {
      * Returns true if input is separable, false otherwise.
      */
     public boolean isSeparable() {
-        Object[] labels = g.labels().toArray();
-        List<String> result = g.BFS((String) labels[0]);
-        return labels.length != result.size();
-    }
-   // how to get a starting node from g ?
+        String[] all = new String[g.labels().size()];
+        int n = 0;
+        for(String s : g.labels()) {
+            all[n] = s;
+            n += 1;
+        }
+        Set<String> part1 = new HashSet<>();
+        Set<String> part2 = new HashSet<>();
 
+        /* add any person to part 1, and then add all it's non-enemies to part 1.
+          add all it's enemies(neighbors) to part 2.
+         */
+        part1.add(all[0]);
+        for(int i = 1; i < all.length; i += 1) {
+            if(!g.neighbors(all[0]).contains(all[i])) {
+                part1.add(all[i]);
+            } else {
+                part2.add(all[i]);
+            }
+        }
+        /* check if the two parties have enemies inside, if yes, return false.
+         */
+        for(String s : part1) {
+            for(String enemy : g.neighbors(s)) {
+                if(part1.contains(enemy)) return false;
+            }
+        }
+        for(String s : part2) {
+            for(String enemy : g.neighbors(s)) {
+                if(part2.contains(enemy)) return false;
+            }
+        }
+        return true;
+    }
 
 
     /* HELPERS FOR READING IN CSV FILES. */
