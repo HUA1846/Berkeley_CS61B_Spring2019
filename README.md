@@ -15,7 +15,7 @@ Course link: https://sp19.datastructur.es/
 | clab 7    |[BST Performance](https://github.com/HUA1846/CS61B_Self_Study/tree/main/clab7)|Experiment BST average depth with random insertion and symmetric/asymmetric deletions 
 | clab 8    |[FlightSolver, RabinKarp](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab8)|Part 1: Use HashMap and PQ to solve max passengers problem
 |           ||Part 2: implement RabinKarp string-searching algorithm that “uses hashing to find any one of a set of pattern strings in a text”. One practical application is detecting plagiarism.
-| clab 9    |[Graph, SeparableEnemy](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab9)|Use graph to separate the party-goers into two groups such that no two members of the same group are enemies
+| clab 9    |[Graph, SeparableEnemy](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/clab9)|Use graph to separate the party-goers into two groups such that no two members of the same group are enemies.
 
 |Labs |             | Description |
 |---------|---------|-------------|
@@ -25,8 +25,8 @@ Course link: https://sp19.datastructur.es/
 | lab 8    |[HashMap](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab8) |
 | lab 9    |[TrieSet](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab9) |implement TrieSet. Use HashMap v.s DataIndexedCharMap to improve space complexity
 
-|Homework |         |
-|---------|---------|
+|Homework |         | Description |
+|---------|---------|-------------|
 | hw 1    |[Sound Synthesis](https://github.com/HUA1846/CS61B_Self_Study/tree/main/hw1%20-%20Sound%20Synthesis)
 | hw 2    |[Percolation](https://github.com/HUA1846/CS61B_Self_Study/tree/main/hw2)
-| hw 3    |[Hashing, Oomage](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/hw3%20-%20Hashing/hw3/hash)|Implement hashcode function to improve Object distribution in a HashMap. Be aware of integer overflow in java
+| hw 3    |[Hashing, Oomage](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/hw3%20-%20Hashing/hw3/hash)|Implement hashcode function to improve Object distribution in a HashMap. Be aware of integer overflow in java.
