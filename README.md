@@ -23,7 +23,7 @@ Course link: https://sp19.datastructur.es/
 | lab 6    |[UnionFind](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab6%20UnionFind) |
 | lab 7    |[BSTMap](https://github.com/HUA1846/CS61B_Self_Study/tree/main/lab7) |
 | lab 8    |[HashMap](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab8) |
-| lab 9    |[TrieSet](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab9) |implement TrieSet. Use HashMap v.s DataIndexedCharMap to improve space complexity
+| lab 9    |[TrieSet](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/lab9) |implement TrieSet. Use HashMap v.s DataIndexedCharMap to improve space complexity.
 
 |Homework |         | Description |
 |---------|---------|-------------|
