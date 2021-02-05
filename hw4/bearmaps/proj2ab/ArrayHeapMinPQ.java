@@ -27,13 +27,14 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         private void setPriority(double p) {
             this.priority = p;
         }
+
     }
 /* Adds an item of type T with the given priority. If the item already exists,
    throw an IllegalArgumentException. You may assume that item is never null. */
     @Override
     public void add(T item, double priority) {
         if(contains(item)) {
-            throw new IllegalArgumentException("this item already exists");
+            throw new IllegalArgumentException();
         }
         minHeap[pos] = new Entry(item, priority);
         keys.put(item, pos);
@@ -99,17 +100,17 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         if(!contains(item)) {
             throw new NoSuchElementException();
         }
-        int index = find(item);
+        int index = keys.get(item);
+        double oldPriority = minHeap[index].priority;
+//        if(priority == oldPriority) return;
         minHeap[index].setPriority(priority);
-        if(minHeap[index].priority < minHeap[parentIdx(index)].priority) {
+        if(priority < oldPriority) {
             bubbleUp(index);
         } else {
             sinkDown(index);
         }
     }
-    private int find(T item) {
-        return keys.get(item);
-    }
+
 
     private void resize() {
         if(size == minHeap.length - 1) {
@@ -131,27 +132,29 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
     }
 
     private void sinkDown(int n) {
-        if(n >= pos/2) return;
-        if(minHeap[n].priority < minHeap[n * 2].priority &&
-                minHeap[n].priority < minHeap[n * 2 + 1].priority) {
-            return;
-        }
-        else {
-            swap(minHeap[n], minHeap[smallerChild(n)]);
-            sinkDown(smallerChild(n));
+        while(n < pos/2) {
+            if(minHeap[n].priority < minHeap[smallerChild(n)].priority) {
+                break;
+            }
+            else {
+                swap(minHeap[n], minHeap[smallerChild(n)]);
+                n = smallerChild(n);
+                sinkDown(n);
+            }
         }
     }
     private void bubbleUp(int n) {
-        if(n > 1 && minHeap[n].priority < minHeap[parentIdx(n)].priority) {
+        while (n > 1 && minHeap[n].priority < minHeap[parentIdx(n)].priority) {
             swap(minHeap[n], minHeap[parentIdx(n)]);
+            n = parentIdx(n);
             bubbleUp(parentIdx(n));
         }
     }
     private void swap(Entry e1, Entry e2) {
         T temp = (T)e1.item;
         double p = e1.priority;
-        int index1 = find((T)e1.item);
-        int index2 = find((T)e2.item);
+        int index1 = keys.get((T)e1.item);
+        int index2 = keys.get((T)e2.item);
         keys.replace((T) e1.item, index2);
         keys.replace((T) e2.item, index1);
         e1.item = e2.item;
