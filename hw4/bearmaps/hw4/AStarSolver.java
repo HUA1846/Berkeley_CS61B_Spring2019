@@ -8,7 +8,7 @@ import edu.princeton.cs.algs4.Stopwatch;
 public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
     private SolverOutcome outcome;
     private double solutionWeight;
-    private List<Vertex> solution;
+    private LinkedList<Vertex> solution;
     private double timeSpent;
     private ArrayHeapMinPQ<Vertex> fringe;
     private Map<Vertex, Double> distTo;
@@ -20,7 +20,7 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         fringe = new ArrayHeapMinPQ<>(input.neighbors(start).size());
         distTo = new HashMap<>();
         edgeTo = new HashMap<>();
-        solution = new ArrayList<>();
+        solution = new LinkedList<>();
         numStatesExplored = 0;
 
         distTo.put(start, 0.0);
@@ -37,10 +37,12 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
             Vertex current = fringe.removeSmallest();
             numStatesExplored += 1;
             for(WeightedEdge<Vertex> e : input.neighbors(current)) {
+//                if(distTo.containsKey(end) && distTo.get(end) < e.weight()) break;
                 if(!distTo.containsKey(e.to())) {
                     distTo.put(e.to(), Double.POSITIVE_INFINITY);
                     fringe.add(e.to(), distTo.get(e.to()) + input.estimatedDistanceToGoal(e.to(), end));
                     edgeTo.put(e.to(), current);
+
                 }
 
                 // relax edges
@@ -70,15 +72,14 @@ public class AStarSolver<Vertex> implements ShortestPathsSolver<Vertex> {
         add vertices of shortest path to the a list.
         reverse the order and add to solution list.
          */
-        List<Vertex> reversed = new ArrayList<>();
-        reversed.add(end);
+
+
+
         Vertex shortest = end;
+        solution.addFirst(end);
         while(!shortest.equals(start)) {
-            reversed.add(edgeTo.get(shortest));
+            solution.addFirst(edgeTo.get(shortest));
             shortest = edgeTo.get(shortest);
-        }
-        for(int i = reversed.size() - 1; i >= 0 ; i -= 1) {
-            solution.add(reversed.get(i));
         }
 
         timeSpent = sw.elapsedTime();
