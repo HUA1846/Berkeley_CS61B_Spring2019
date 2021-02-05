@@ -16,15 +16,15 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
         pos = 1;
     }
 
-    public class Entry<T> {
-        T item;
-        double priority;
+    private class Entry<T> {
+        private T item;
+        private double priority;
 
-        public Entry(T i, double p) {
+        private Entry(T i, double p) {
             item = i;
             priority = p;
         }
-        public void setPriority(double p) {
+        private void setPriority(double p) {
             this.priority = p;
         }
     }
@@ -66,15 +66,24 @@ public class ArrayHeapMinPQ<T> implements ExtrinsicMinPQ<T> {
             throw new NoSuchElementException();
         }
         T returnItem = (T)minHeap[1].item;
-        keys.remove(returnItem);
+        if(size == 1) {
+            size -= 1;
+            pos -= 1;
+            minHeap[1] = null;
+            keys.remove(returnItem);
+            return returnItem;
+        }
+
         minHeap[1] = minHeap[pos - 1];
         minHeap[pos - 1] = null;
+        keys.replace((T)minHeap[1].item, 1);
         pos -= 1;
         size -= 1;
         sinkDown(1);
         if((double) size/minHeap.length < 0.25) {
             resize();
         }
+        keys.remove(returnItem);
         return returnItem;
     }
     @Override
