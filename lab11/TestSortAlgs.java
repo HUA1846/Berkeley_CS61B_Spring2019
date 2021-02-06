@@ -55,6 +55,29 @@ public class TestSortAlgs {
         assertEquals("Omar", sortedTas.dequeue());
 
     }
+    @Test
+    public void duplicates() {
+        Queue<Integer> nums = new Queue<>();
+        for(int i = 0; i < 5000; i += 1) {
+            nums.enqueue(3);
+            nums.enqueue(2);
+        }
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
+//        Queue<Integer> sorted = MergeSort.mergeSort(nums);
+        assertEquals(2, (int) sorted.peek());
+        assertTrue(isSorted(sorted));
+    }
+
+    @Test
+    public void sorted() {
+        Queue<Integer> nums = new Queue<>();
+        for(int i = 0; i < 10000; i += 1) {
+            nums.enqueue(i + 1);
+        }
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
+//        Queue<Integer> sorted = MergeSort.mergeSort(nums);
+        assertEquals(1, (int) sorted.peek());
+    }
 
     /**
      * Returns whether a Queue is sorted or not.

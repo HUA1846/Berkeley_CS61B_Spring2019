@@ -83,17 +83,12 @@ public class QuickSort {
         Queue<Item> greater = new Queue<>();
         partition(items, pivot, less, equal, greater);
         less = quickSort(less);
-        items = less;
-        equal = quickSort(equal);
-        if(items != null) {
-            items = catenate(items, equal);
-        } else items = equal;
         greater = quickSort(greater);
-        if(items != null) {
-            items = catenate(items, greater);
-        } else items = greater;
 
+        items = catenate(less, equal);
+        items = catenate(items, greater);
 
         return items;
-    }
+
+  }
 }
