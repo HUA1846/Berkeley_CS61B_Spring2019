@@ -20,6 +20,12 @@ public class TestSortAlgs {
         assertEquals(15, (int) sorted.dequeue());
         assertEquals(25, (int) sorted.dequeue());
         assertEquals(30, (int) sorted.dequeue());
+
+        for(int i = 0; i < 10000; i += 1) {
+            nums.enqueue(10000 - i);
+        }
+        Queue<Integer> sorted2 = QuickSort.quickSort(nums);
+        assertEquals(1, (int) sorted2.dequeue());
     }
 
     @Test
