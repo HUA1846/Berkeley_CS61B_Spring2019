@@ -96,13 +96,13 @@ public class MergeSort {
     public static <Item extends Comparable> Queue<Item> mergeSort(Queue<Item> items) {
         Queue<Queue<Item>> allItems = makeSingleItemQueues(items);
         Queue<Item> sorted = new Queue<>();
-        Queue<Item> left = new Queue<>();
-        Queue<Item> right = new Queue<>();
-        while(allItems.size() >= 4) {
-                left = mergeSortedQueues(allItems.dequeue(), allItems.dequeue());
-                right = mergeSortedQueues(allItems.dequeue(), allItems.dequeue());
-                sorted = mergeSortedQueues(left, right);
-                allItems.enqueue(sorted);
+        Queue<Item> left;
+        Queue<Item> right;
+        while(allItems.size() >= 2) {
+            left = allItems.dequeue();
+            right = allItems.dequeue();
+            sorted = mergeSortedQueues(left, right);
+            allItems.enqueue(sorted);
         }
         while (!allItems.isEmpty()) {
             sorted = mergeSortedQueues(sorted, allItems.dequeue());

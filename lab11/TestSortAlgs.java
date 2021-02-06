@@ -7,7 +7,19 @@ public class TestSortAlgs {
 
     @Test
     public void testQuickSort() {
+        Queue<Integer> nums = new Queue<>();
+        nums.enqueue(10);
+        nums.enqueue(30);
+        nums.enqueue(25);
+        nums.enqueue(15);
+        nums.enqueue(5);
+        Queue<Integer> sorted = QuickSort.quickSort(nums);
 
+        assertEquals(5, (int) sorted.dequeue());
+        assertEquals(10, (int) sorted.dequeue());
+        assertEquals(15, (int) sorted.dequeue());
+        assertEquals(25, (int) sorted.dequeue());
+        assertEquals(30, (int) sorted.dequeue());
     }
 
     @Test
