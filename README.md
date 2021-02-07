@@ -30,3 +30,4 @@ Course link: https://sp19.datastructur.es/
 | hw 1    |[Sound Synthesis](https://github.com/HUA1846/CS61B_Self_Study/tree/main/hw1%20-%20Sound%20Synthesis)
 | hw 2    |[Percolation](https://github.com/HUA1846/CS61B_Self_Study/tree/main/hw2)
 | hw 3    |[Hashing, Oomage](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/hw3%20-%20Hashing/hw3/hash)|Implement hashcode function to improve Object distribution in a HashMap. Be aware of integer overflow in java.
+| hw 4    |[Puzzle Solver](https://github.com/HUA1846/Berkeley_CS61B_Spring2019/tree/main/hw4)| implement A* shortest path algorithm using the ArrayMinPQ built in Proj2a
