@@ -125,8 +125,8 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
     }
 
     private Map<String, Object> calcImages(int depth, double lrlon, double ullon, double ullat, double lrlat) {
-        double blockWidth = (ROOT_LRLON - ROOT_ULLON) / (depth * 4);
-        double blockHeight = (ROOT_ULLAT - ROOT_LRLAT) / (depth * 4);
+        double blockWidth = (ROOT_LRLON - ROOT_ULLON) / (Math.pow(2, depth));
+        double blockHeight = (ROOT_ULLAT - ROOT_LRLAT) / (Math.pow(2, depth));
         int xStart = (int) Math.abs(Math.floor((ullon - ROOT_ULLON)/blockWidth));
         int yStart = (int) Math.abs(Math.floor((ROOT_ULLAT - ullat)/blockHeight));
         int xEnd = (int) Math.abs(Math.ceil((lrlon - ROOT_ULLON)/blockWidth));
@@ -157,17 +157,9 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         rasters.put("raster_lr_lat", raster_lr_lat);
         return rasters;
     }
-    /* order of params: ullon, ullat, lrlon, lrlat, w, h.
-    -122.29288796055374
-    37.88362657285339
-    -122.2756847672312
-    37.85601498428901
-    557.0
-    894.0
-     */
+
     private int calcDepth(double lrlon, double ullon, double width) {
         double LonDPP = (lrlon - ullon) / width;
-        System.out.println("LonDPP: " + LonDPP);
         if(d0 <= LonDPP) return 0;
         if(d1 <= LonDPP) return 1;
         if(d2 <= LonDPP) return 2;
@@ -176,6 +168,7 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         if(d5 <= LonDPP) return 5;
         if(d6 <= LonDPP) return 6;
         if(d7 <= LonDPP) return 7;
+        if(LonDPP < d7) return 7;
         else return 0;
 
     }
