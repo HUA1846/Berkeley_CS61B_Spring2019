@@ -131,6 +131,12 @@ public class RasterAPIHandler extends APIRouteHandler<Map<String, Double>, Map<S
         int yStart = (int) Math.abs(Math.floor((ROOT_ULLAT - ullat)/blockHeight));
         int xEnd = (int) Math.abs(Math.ceil((lrlon - ROOT_ULLON)/blockWidth));
         int yEnd = (int) Math.abs(Math.ceil((ROOT_ULLAT - lrlat)/blockHeight));
+        /* check if out of bound */
+        if(ullon < ROOT_ULLON) xStart = 0;
+        if(ullat > ROOT_ULLAT) yStart = 0;
+        if(xEnd > Math.pow(2, depth)) xEnd = (int) Math.pow(2, depth);
+        if(yEnd > Math.pow(2, depth)) yEnd = (int) Math.pow(2, depth);
+
         double raster_ul_lon = ROOT_ULLON + xStart * blockWidth;
         double raster_ul_lat = ROOT_ULLAT - yStart * blockHeight;
         double raster_lr_lon = ROOT_ULLON + xEnd * blockWidth;
